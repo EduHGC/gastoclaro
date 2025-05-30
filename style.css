@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+body{
+    
+    font-family: 'Roboto', sans-serif;
+    display: flex;   
+    align-items: center;
+    flex-direction: column;
+    background-color: #45556C;
+}
+
+
+#info{
+    width: 360px;
+    height: 48px;
+}
+
+ #content{
+   width: 360px;
+   height: 700px;
+   background-color: #F1F5F9;
+   border-radius: 8px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   gap: 10px;
+ }
+
+ #logo{
+    display: block;
+ }
+
+ #botoes{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+ }
+
+ .btn-bem-vindo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    height: 62px;
+    text-decoration: none;
+    background-color: #45556C;
+    color: #F1F5F9;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s; 
+ }
+
+ .btn-bem-vindo:hover{
+    background-color: #CAD5E2;
+    border: 2px solid #45556C;
+    color: #45556C;
+ }
+ 

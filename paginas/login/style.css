@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    display: flex;   
+    align-items: center;
+    flex-direction: column;
+    background-color: #45556C;
+}
+#content{
+    width: 360px;
+    height: 700px;
+    border-radius: 8px;
+    background-color: #F1F5F9;
+    display: flex;   
+    align-items: center;
+    flex-direction: column;
+}
+
+#logo{
+    display: flex;
+    justify-content: center;
+    margin-top: 14px;
+}
+
+#voltar{
+    width: 360px;
+    height: 48px;
+}
+
+#voltar a img{
+    margin-left: 15px;
+}
+
+#info{
+    width: 360px;
+    height: 48px;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 14px;
+    margin: 20px;
+}
+
+form div{
+    display: flex;
+    flex-direction: column;
+}
+
+form label{
+    color: #020618;
+    font-size: 13px;
+    font-weight: 700;
+    
+}
+
+form input{
+    background-color: #CAD5E2;
+    width: 320px;
+    height: 60px;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+form input::placeholder{
+    color: #1D293D;
+}
+
+form a{   
+    align-self: flex-start;
+    text-decoration: none;
+    color: #020618;
+    font-size: 13px;
+    font-weight: 700;
+
+}
+
+form button{
+    width: 320px;
+    height: 62px;
+    border-radius: 8px;
+    background-color: #45556C;
+    color: #CAD5E2;
+    border: none;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 100px;
+}
+
+#mensagem-erro{
+    display: none;
+    align-self: flex-start;
+    color: red;
+    font-size: 13px;
+    font-weight: 700;
+}
