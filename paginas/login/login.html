@@ -10,7 +10,7 @@
 <body>
     
     <div id="content">
-        <div id="info"></div>
+        
         <div id="voltar">
             <a href="../bemvindo/bemvindo.html"><img src="../../assets/Icon.png" alt=""></a>
         </div>
@@ -18,18 +18,20 @@
             <img src="../../assets/Gasto Claro.png" alt="">
         </div>
         <form id="form-login">
-        <div>
-            <label for="email" class="label-dados-login">Email</label>
-            <input required type="email" name="email" id="input-email" class="input-dados-login" placeholder="exemplo@exemplo.com">
+            <div>
+                <label for="email" class="label-dados-login">Email</label>
+                <input required type="email" name="email" id="input-email" class="input-dados-login" placeholder="exemplo@exemplo.com">
             </div>
 
             <div>
-                <label for="email" class="label-dados-login">Senha</label>
+                <label for="password" class="label-dados-login">Senha</label>
                 <input required type="password" name="password" id="input-password" class="input-dados-login">
             </div>
             <p id="mensagem-erro">Email ou senha inválidos</p>
             <a href="#">Esqueci a senha</a>
-            <button type="submit">Entrar</button>
+            <div id="btn-login">
+                <button type="submit">Entrar</button>
+            </div>
         </form>
     </div>
     <script src="script.js"></script>

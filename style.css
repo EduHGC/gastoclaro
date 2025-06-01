@@ -4,26 +4,35 @@
     box-sizing: border-box;
 }
 
-
+html, body{
+   height: 100%;
+}
 
 body{
-    
     font-family: 'Roboto', sans-serif;
     display: flex;   
     align-items: center;
+    justify-content: center;
     flex-direction: column;
     background-color: #45556C;
+    padding: 10px;
 }
 
+#logo{
+    max-width: 100%;
+    height: auto;
+ }
 
-#info{
-    width: 360px;
-    height: 48px;
+#logo img{
+   width: 100%;
+   max-width: 200px;
+   height: auto;
 }
 
  #content{
-   width: 360px;
-   height: 700px;
+   width: 100%;
+   height: 100%;
+   max-width: 360px;
    background-color: #F1F5F9;
    border-radius: 8px;
    display: flex;
@@ -31,16 +40,20 @@ body{
    justify-content: center;
    align-items: center;
    gap: 10px;
+   padding: 20px;
  }
 
- #logo{
-    display: block;
+
+ #bem-vindo h1{
+   font-size: 1.2rem;
+   text-align: center;
  }
 
  #botoes{
     display: flex;
     flex-direction: column;
     text-align: center;
+    width: 100%;
     gap: 20px;
  }
 
@@ -48,7 +61,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 320px;
+    width: 100%;
     height: 62px;
     text-decoration: none;
     background-color: #45556C;
@@ -56,7 +69,8 @@ body{
     border-radius: 8px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.2s; 
+    transition: all 0.9s; 
+    font-size: 1rem;
  }
 
  .btn-bem-vindo:hover{

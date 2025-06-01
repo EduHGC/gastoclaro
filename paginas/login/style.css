@@ -3,102 +3,116 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+html, body{
+   height: 100%;
+}
+
 body{
     font-family: 'Roboto', sans-serif;
     display: flex;   
     align-items: center;
+    justify-content: center;
     flex-direction: column;
     background-color: #45556C;
+    padding: 10px;
 }
+
 #content{
-    width: 360px;
-    height: 700px;
-    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    max-width: 360px;
     background-color: #F1F5F9;
-    display: flex;   
+    border-radius: 8px;
+    display: flex;  
+    flex-direction: column; 
     align-items: center;
-    flex-direction: column;
+    padding: 20px;
 }
 
 #logo{
-    display: flex;
-    justify-content: center;
+    max-width: 100%;
+    height: auto;
     margin-top: 14px;
 }
 
 #voltar{
-    width: 360px;
+    width: 100%;
     height: 48px;
+    max-width: 360px;
 }
 
 #voltar a img{
-    margin-left: 15px;
+    max-width: 100%;
+    height: auto;
 }
 
-#info{
-    width: 360px;
-    height: 48px;
-}
 
-form{
+#form-login{
+    width: 100%;
     display: flex;
+    flex-grow: 1;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 20px;
     font-size: 14px;
-    margin: 20px;
+    
 }
 
-form div{
+#form-login div{
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
-form label{
+#form-login label{
     color: #020618;
-    font-size: 13px;
+    font-size: 0.9rem;
     font-weight: 700;
     
 }
 
-form input{
+#form-login input{
     background-color: #CAD5E2;
-    width: 320px;
+    width: 100%;
     height: 60px;
     border: none;
     border-radius: 8px;
     padding: 10px;
 }
 
-form input::placeholder{
+#form-login input::placeholder{
     color: #1D293D;
 }
 
-form a{   
+#form-login a{   
     align-self: flex-start;
     text-decoration: none;
     color: #020618;
-    font-size: 13px;
+    font-size: 0.9rem;
     font-weight: 700;
-
 }
 
-form button{
-    width: 320px;
+#btn-login{
+    margin-top: auto;
+}
+
+#form-login button{
+    width: 100%;
     height: 62px;
     border-radius: 8px;
     background-color: #45556C;
     color: #CAD5E2;
     border: none;
-    font-size: 13px;
+    font-size: 1rem;
     font-weight: 700;
-    margin-top: 100px;
+    margin-top: auto;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.8s;
 }
 
- form button:hover{
+ #form-login button:hover{
     background-color: #CAD5E2;
     border: 2px solid #45556C;
     color: #45556C;
