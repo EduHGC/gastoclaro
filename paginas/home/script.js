@@ -100,6 +100,9 @@ function criar(resultado){
 
         estabelecimento.appendChild(card);
     });
-    
-    
 }
+
+document.getElementById("cadastro-estabelecimento").addEventListener("click", (event) => {
+        event.preventDefault();
+        window.location.href = "./homecadastro.html";
+})
