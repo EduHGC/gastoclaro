@@ -112,6 +112,13 @@ body{
     font-weight: 700;
 }
 
+#confirmacao p{
+    color: #FF1414;
+    font-size: 0.9rem;
+    font-weight: 700;
+    display: none;
+}
+
 #btn-cadastrar button{
     width: 100%;
     height: 62px;
