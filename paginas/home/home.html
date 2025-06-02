@@ -9,42 +9,51 @@
 </head>
 <body>
     <div id="content">
-       <div id="info"></div>
        <div id="titulo">
             <h1>Estabelecimentos</h1>
        </div>
-       <div id="lista-estabelecimento">
-        <!--
-        <div class="teste">
-            <div class="pontos"></div>
-            <div class="descricao">
-                <div class="estabelecimento">Estabelecimento 1</div>
-                <div class="meta">Meta de consumo: xx</div>
-                <div class="fatura">Fatura recente: xx</div>
-
+       <div id="corpo">
+            <div id="lista-estabelecimento">
+                <!--
+                <div class="card">
+                    <div class="pontos"></div>
+                    <div class="descricao">
+                        <div class="estabelecimento">Estabelecimento 1</div>
+                        <div class="meta">Meta de consumo: xx</div>
+                        <div class="fatura">Fatura recente: xx</div>
+                    </div>
+                    <div class="editar">
+                        <a href="#"><img src="../../assets/edit.png" alt=""></a>
+                    </div>
+                    <div class="apagar">
+                        <img src="../../assets/trash.png" alt="">
+                    </div>
+                </div>-->
             </div>
-            <div class="editar">
-                <a href="#"><img src="../../assets/edit.png" alt=""></a>
+            <div id="cadastro-estabelecimento">
+                    <button type="submit"><span>+   </span>Novo estabelecimento</button>
             </div>
-            <div class="apagar">
-                <img src="../../assets/trash.png" alt="">
-            </div>
-        </div>
-        -->
        </div>
-       
-       <div id="menu"></div>
+       <div id="menu">
+            <div>
+                <a href="#"><img src="../../assets/notif.png" alt=""><span>Notificações</span></a>
+            </div>
+            <div>
+                <a href="#"><img src="../../assets/homenegrito.png" alt=""><span>Página inicial</span></a>
+            </div>
+            <div>
+                <a href="#"><img src="../../assets/perfil.png" alt=""><span>Perfil</span></a>
+            </div>
+       </div>
 
     </div>
     
-
-    
     <script src="../utils.js"></script>
     <script>
-        logado();
+        //logado();
     </script>
-
     <script src="./script.js"></script>
+    
     <!--
     <script>
         criar();

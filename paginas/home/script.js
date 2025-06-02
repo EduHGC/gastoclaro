@@ -37,7 +37,7 @@ function criar(resultado){
     
     resultado.forEach((elemento) => {
         const card = document.createElement("div");
-        card.classList.add("teste");
+        card.classList.add("card");
 
 
         //pontos
