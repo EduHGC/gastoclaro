@@ -101,4 +101,5 @@ function criar(resultado){
         estabelecimento.appendChild(card);
     });
     
+    
 }
