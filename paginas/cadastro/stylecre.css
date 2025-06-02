@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body{
+   height: 100%;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    display: flex;   
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #45556C;
+    padding: 10px;
+}
+
+#content{
+    width: 100%;
+    height: 100%;
+    max-width: 360px;
+    background-color: #F1F5F9;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column; 
+    padding: 20px;
+}
+
+#voltar{
+    width: 100%;
+    height: 48px;
+    max-width: 360px;
+}
+
+#voltar a img{
+    max-width: 100%;
+    height: auto;
+}
+
+#cabecalho-img{
+    width: 100%;
+    height: 40px;
+    max-width: 360px;
+}
+
+#cabecalho-img img{
+    max-width: 100%;
+    height: auto;
+}
+
+#cabecalho-texto{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#cabecalho-texto h1{
+    width: 100%;
+    color: #020618;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+#cabecalho-texto h2{
+    width: 100%;
+    color: #020618;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+#form-credenciais{
+    width: 100%;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 14px;
+    margin-top: auto;
+}
+
+#form-credenciais div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#form-credenciais label{
+    color: #020618;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+#form-credenciais input{
+    background-color: #CAD5E2;
+    width: 100%;
+    height: 60px;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+#check{
+    color: #020618;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+#btn-cadastrar button{
+    width: 100%;
+    height: 62px;
+    border-radius: 8px;
+    background-color: #45556C;
+    color: #CAD5E2;
+    border: none;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.8s;
+}
+
+#btn-cadastrar button:hover{
+    background-color: #CAD5E2;
+    border: 2px solid #45556C;
+    color: #45556C;
+ }

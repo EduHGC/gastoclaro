@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylecre.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div id="content">
+        <div id="voltar">
+            <a href="../cadastro/cadastrar.html"><img src="../../assets/Icon.png" alt=""></a>
+        </div>
+            <div id="cabecalho">
+                <div id="cabecalho-img">
+                <img src="../../assets/Frame2.png" alt="">
+            </div>
+            <div id="cabecalho-texto">
+                <h1>Queremos te conhecer melhor!</h1>
+                <h2>Precisamos de suas informações básicas</h2>
+            </div>
+        </div>
+
+        <form id="form-credenciais">
+            <div>
+                <label for="input-email" class="input-cadastro">Nome</label>
+                <input required type="email" name="email" id="input-email" class="input-cadastro">
+            </div>
+
+            <div>
+                <label for="input-senha" class="input-cadastro">Senha</label>
+                <input required type="password" name="senha" id="input-senha" class="input-cadastro">
+            </div>
+            <div id="check">
+                <p id="maiuscula"><span>✕</span> Pelo menos uma letra maiúscula</p>
+                <p id="minuscula"><span>✕</span> Pelo menos uma letra minúscula</p>
+                <p id="especial"><span>✕</span> Pelo menos um caracter especial</p>
+                <p id="tamanho"><span>✕</span> Pelo menos 8 caracteres</p>
+            </div>
+            <div>
+                <label for="input-confirmar-senha" class="input-cadastro">Confirmar senha</label>
+                <input required type="password" name="confirmar-senha" id="input-confirmar-senha" class="input-cadastro">
+            </div>
+        </form>
+        <div id="btn-cadastrar">
+                <button type="submit" form="form-credenciais">Realizar cadastro</button>
+        </div>
+    </div>
+    <script src="scriptcred.js"></script>
+</body>
+</html>

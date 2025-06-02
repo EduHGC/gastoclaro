@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div id="form-cadastro">
+        <form id="form-cadastro">
             <div>
                 <label for="input-nome" class="input-cadastro">Nome</label>
                 <input required type="text" name="nome" id="input-nome" class="input-cadastro">
@@ -34,13 +34,14 @@
             </div>
 
             <div>
-                <label for="input-data" class="input-cadastro">Sobrenome</label>
+                <label for="input-data" class="input-cadastro">Data de nascimento</label>
                 <input required type="date" name="data" id="input-data" class="input-cadastro">
             </div>
-        </div>
+        </form>
         <div id="btn-prosseguir">
-                <button type="submit">Prosseguir</button>
+                <button type="submit" form="form-cadastro">Prosseguir</button>
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
