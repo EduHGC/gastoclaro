@@ -1,4 +1,3 @@
-/*2*/
 * {
     margin: 0;
     padding: 0;
@@ -52,6 +51,7 @@ body{
     box-shadow: 0 -4px 8px -2px rgba(0, 0, 0, 0.2);
     flex-shrink: 0;
 }
+
 #corpo{
     margin-top: 10px;
     width: 100%;
@@ -178,7 +178,6 @@ body{
     padding: 10px;
     background-color: white;
     flex-shrink: 0;
-    margin-bottom: 0px;
 }
 
 #novo-estabelecimento{
@@ -252,7 +251,6 @@ body{
     margin-bottom: 4px;
 }
 
-/* Aumenta o espaçamento das pontas */
 #menu div:first-child {
     margin-right: 40px;
     color: #45556C;
