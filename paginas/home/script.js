@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     event.preventDefault();
     
     requisicao().then((dados) => {
-        criar(dados);
+        criarElementos(dados);
     }) 
 
 })
@@ -32,7 +32,7 @@ async function requisicao(){
     return resultado;
 };
 
-function criar(resultado){
+function criarElementos(resultado){
     const estabelecimento = document.getElementById("lista-estabelecimento");
     
     resultado.forEach((elemento) => {
