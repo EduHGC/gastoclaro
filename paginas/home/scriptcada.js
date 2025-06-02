@@ -101,8 +101,3 @@ function criarElementos(resultado){
         estabelecimento.appendChild(card);
     });
 }
-
-
-document.getElementById("novo-estabelecimento").addEventListener("submit", (evento) => {
-    
-})
