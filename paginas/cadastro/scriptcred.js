@@ -99,13 +99,15 @@ document.getElementById("form-credenciais").addEventListener("submit", async (ev
         try{
             const resultado = await cadastrar(dados, URL, APP_ID, API_KEY);
             console.log(resultado);
+            sessionStorage.removeItem("nome");
+            sessionStorage.removeItem("data");
+            sessionStorage.removeItem("sobrenome");
+            window.location.href = "../login/login.html";
         }catch(erro){
             console.error("Erro ao cadastrar:", erro);
             alert(erro.message);
         }
-        sessionStorage.removeItem("nome");
-        sessionStorage.removeItem("data");
-        sessionStorage.removeItem("sobrenome");
+        
 
 
     }else{

@@ -137,6 +137,7 @@ document.getElementById("novo-estabelecimento").addEventListener("submit", async
         const resposta = await cadastrarEstabelecimento(dados);
         alert("Imóvel cadastrado com sucesso");
         console.log(resposta);
+        window.location.href = "./home.html";
     }catch(erro){
         console.error("Erro ao cadastrar:", erro);            
         alert(erro.message);
