@@ -73,10 +73,8 @@ function criarElementos(resultado){
         descricao.appendChild(fatura);
 
         descricao.addEventListener("click", () => {
-            sessionStorage.setItem("objectId", elemento.objectId);
-            sessionStorage.setItem("nome", elemento.nome);
-            sessionStorage.setItem("meta_consumo", elemento.meta_consumo);
-            sessionStorage.setItem("fatura", elemento.fatura);
+            sessionStorage.setItem("id_imovel", elemento.objectId);
+            sessionStorage.setItem("nomeEstabelecimento", elemento.nome);
 
             /*
             const teste = sessionStorage.getItem("objectId");

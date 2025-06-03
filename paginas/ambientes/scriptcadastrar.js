@@ -1,9 +1,6 @@
 const APP_ID = 'ubZ4XLWmNivxZCMH7ArJ4ck8bwkf67OEt9VOGNHF';
 const API_KEY = 'ZhfsOKyedOFj6E4RDYpgasmvvjPEmoDICFOlBB1R';
 
-document.getElementById("cadastrar-ambiente").addEventListener("click", () => {
-    window.location.href = "./ambientecadastro.html";
-})
 
 document.addEventListener("DOMContentLoaded", async () => {
     
@@ -13,7 +10,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const resposta = await requisicaoAmbientes();
     criarElementos(resposta);
     console.log(resposta);
-
 });
 
 function criarElementos(dados){
@@ -83,6 +79,52 @@ function criarElementos(dados){
     });
 }
 
+document.getElementById("novo-ambiente").addEventListener("submit", async (evento) => {
+    const idImovel = sessionStorage.getItem("id_imovel");
+    const nomeAmbiente = document.getElementById("input-nome").value;
+    
+    const dados = {
+        id_imovel: {
+            "__type": "Pointer",
+            "className": "Estabelecimentos",
+            "objectId": idImovel
+        },
+        nome: nomeAmbiente
+    }
+
+    console.log(dados);
+
+    try{
+        const resposta = await cadastrarAmbiente(dados);
+        alert("Ambiente cadastrado com sucesso");
+        console.log(resposta);
+    }catch(erro){
+        console.error("Erro ao cadastrar:", erro);            
+        alert(erro.message);
+    }
+})
+
+async function cadastrarAmbiente(dados){
+    const resposta = await fetch(`https://parseapi.back4app.com/classes/ambiente`, {
+        method: 'POST',
+        headers:{
+            'X-Parse-Application-Id': APP_ID,
+            'X-Parse-REST-API-Key': API_KEY,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+    })
+
+    if(!resposta.ok){
+        throw new Error(`Erro HTTP: ${resposta.status}`);
+    }
+
+    const dado = await resposta.json();
+
+    return dado;
+}
+
+
 async function requisicaoAmbientes(){
     const idImovel = sessionStorage.getItem("id_imovel");
     const where = encodeURIComponent(JSON.stringify({id_imovel: {
@@ -109,7 +151,3 @@ async function requisicaoAmbientes(){
 
     return dado.results;
 }
-
-
-
-
