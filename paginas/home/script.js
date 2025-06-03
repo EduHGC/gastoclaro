@@ -11,7 +11,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
 })
  
 async function requisicao(){
-    const resultado = await fetch('https://parseapi.back4app.com/classes/Estabelecimentos/', {
+    const idProprietario = sessionStorage.getItem("userId");
+    const where = encodeURIComponent(JSON.stringify({id_usuario: {
+        __type: "Pointer",
+        className: "_User",
+        objectId: idProprietario
+        }
+    }))
+    
+    const resultado = await fetch(`https://parseapi.back4app.com/classes/Estabelecimentos?where=${where}`, {
         method: 'GET',
         headers:{
             "X-Parse-Application-Id": APP_ID,
@@ -113,7 +121,7 @@ function criarElementos(resultado){
         card.appendChild(descricao);
         card.appendChild(editar);
         card.appendChild(apagar);
-        
+
         estabelecimento.appendChild(card);
     });
 }

@@ -30,6 +30,8 @@ document.getElementById('form-login').addEventListener('submit', async (event) =
 
         sessionStorage.setItem("sessionToken", data.sessionToken);
         sessionStorage.setItem("userId", data.objectId);
+        sessionStorage.setItem("nome", data.nome);
+        sessionStorage.setItem("sobrenome", data.sobrenome);
         window.location.href = "../home/home.html";
     }catch (error) {
         console.error("Erro ao fazer login:", error);

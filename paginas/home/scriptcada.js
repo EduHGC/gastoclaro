@@ -11,7 +11,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
 })
  
 async function requisicao(){
-    const resultado = await fetch('https://parseapi.back4app.com/classes/Estabelecimentos/', {
+    const idProprietario = sessionStorage.getItem("userId");
+    const where = encodeURIComponent(JSON.stringify({id_usuario: {
+        __type: "Pointer",
+        className: "_User",
+        objectId: idProprietario
+        }
+    }))
+    
+    const resultado = await fetch(`https://parseapi.back4app.com/classes/Estabelecimentos?where=${where}`, {
         method: 'GET',
         headers:{
             "X-Parse-Application-Id": APP_ID,
@@ -100,4 +108,58 @@ function criarElementos(resultado){
 
         estabelecimento.appendChild(card);
     });
+}
+
+document.getElementById("novo-estabelecimento").addEventListener("submit", async (evento) => {
+    evento.preventDefault();
+    //sessionStorage.getItem("sessionToken");
+    const idProprietario = sessionStorage.getItem("userId");
+    const nomeEstabelecimento = document.getElementById("input-nome").value;
+    const cep = document.getElementById("input-cep").value;
+    const tipo = document.getElementById("input-tipo").value;
+    const endereco = document.getElementById("input-endereco").value;
+
+    const dados = {
+        id_usuario: {
+            "__type": "Pointer",
+            "className": "_User",
+            "objectId": idProprietario
+        },
+        nome: nomeEstabelecimento,
+        cep: cep,
+        tipo: tipo,
+        endereco: endereco
+    }
+
+    console.log(dados);
+
+    try{
+        const resposta = await cadastrarEstabelecimento(dados);
+        alert("Imóvel cadastrado com sucesso");
+        console.log(resposta);
+    }catch(erro){
+        console.error("Erro ao cadastrar:", erro);            
+        alert(erro.message);
+    }
+})
+
+async function cadastrarEstabelecimento(dados){
+    
+    const resposta = await fetch("https://parseapi.back4app.com/classes/Estabelecimentos/", {
+        method: 'POST',
+        headers: {
+            'X-Parse-Application-Id': APP_ID,
+            'X-Parse-REST-API-Key': API_KEY,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+    })
+
+    if(!resposta.ok){
+        throw new Error(`Erro HTTP: ${resposta.status}`);
+    }
+
+    const dado = await resposta.json();
+
+    return dado;
 }
