@@ -64,6 +64,22 @@ function criarElementos(resultado){
         descricao.appendChild(meta);
         descricao.appendChild(fatura);
 
+        descricao.addEventListener("click", () => {
+            sessionStorage.setItem("objectId", elemento.objectId);
+            sessionStorage.setItem("nome", elemento.nome);
+            sessionStorage.setItem("meta_consumo", elemento.meta_consumo);
+            sessionStorage.setItem("fatura", elemento.fatura);
+
+            /*
+            const teste = sessionStorage.getItem("objectId");
+            alert(`Estabelecimento: ${elemento.nome}
+            Meta de consumo: R$${elemento.meta_consumo}
+            Fatura: R$${elemento.fatura}
+            ID: ${teste}`);*/
+
+            window.location.href = "../ambientes/ambiente.html";
+        });
+
         //Editar
         const editar = document.createElement("div");
         editar.classList.add("editar");
@@ -97,25 +113,7 @@ function criarElementos(resultado){
         card.appendChild(descricao);
         card.appendChild(editar);
         card.appendChild(apagar);
-
         
-        card.addEventListener("click", () => {
-            sessionStorage.setItem("objectId", elemento.objectId);
-            sessionStorage.setItem("nome", elemento.nome);
-            sessionStorage.setItem("meta_consumo", elemento.meta_consumo);
-            sessionStorage.setItem("fatura", elemento.fatura);
-
-            /*
-            const teste = sessionStorage.getItem("objectId");
-            alert(`Estabelecimento: ${elemento.nome}
-            Meta de consumo: R$${elemento.meta_consumo}
-            Fatura: R$${elemento.fatura}
-            ID: ${teste}`);*/
-
-            window.location.href = "../ambientes/ambiente.html";
-        });
-
-
         estabelecimento.appendChild(card);
     });
 }
