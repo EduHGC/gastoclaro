@@ -47,6 +47,13 @@ function criarElementos(dados){
         descricao.appendChild(quantidadeEletro);
         descricao.appendChild(mediaConsumo);
 
+        descricao.addEventListener("click", () => {
+            sessionStorage.setItem("id_ambiente", elemento.objectId);
+            sessionStorage.setItem("nomeAmbiente", elemento.nome);
+            window.location.href = "../eletros/eletros.html";
+        });
+
+        //editar
         const editar = document.createElement("div");
         editar.classList.add("editar");
 
