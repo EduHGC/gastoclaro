@@ -72,6 +72,9 @@ function criarElementos(dados){
         descricao.appendChild(tempoUso);
         descricao.appendChild(consumo);
 
+        
+        
+
         const editar = document.createElement("div");
         editar.classList.add("editar");
 
