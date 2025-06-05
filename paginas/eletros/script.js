@@ -6,8 +6,10 @@ document.getElementById("cadastrar-eletro").addEventListener("click", () => {
 })
 
 document.addEventListener("DOMContentLoaded", async () => {
+    const nomeAmbiente = sessionStorage.getItem("nomeAmbiente");
+    const nomeEstabelecimento = sessionStorage.getItem("nomeEstabelecimento");
     const nome = document.getElementById("titulo");
-    nome.querySelector("h1").textContent = sessionStorage.getItem("nomeEstabelecimento");
+    nome.querySelector("h1").textContent = `${nomeEstabelecimento} > ${nomeAmbiente}`
 
     const resposta = await requisicaoEletros();
     criarElementos(resposta);
