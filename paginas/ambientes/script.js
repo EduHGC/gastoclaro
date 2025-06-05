@@ -11,15 +11,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     nome.querySelector("h1").textContent = sessionStorage.getItem("nomeEstabelecimento");
 
     const resposta = await requisicaoAmbientes();
-    criarElementos(resposta);
+    await criarElementos(resposta);
     console.log(resposta);
 
 });
 
-function criarElementos(dados){
+async function criarElementos(dados){
     const ambientes = document.getElementById("lista-ambientes");
 
-    dados.forEach((elemento) => {
+    for(const elemento of dados){
         const card = document.createElement("div");
         card.classList.add("card");
        
@@ -35,9 +35,14 @@ function criarElementos(dados){
         ambiente.classList.add("ambiente");
         ambiente.textContent = elemento.nome;
 
+
+        //fazer contagem de quantidade de eletrodomestico, utilizar fetch com where usando elemento.objectId
+
+        const qtdEletro = await quantidadeEletros(elemento.objectId);
+
         const quantidadeEletro = document.createElement("div");
         quantidadeEletro.classList.add("quantidade-eletro");
-        quantidadeEletro.textContent = "5 eletrodomestico cadastrado"; 
+        quantidadeEletro.textContent = `${qtdEletro} eletrodomestico cadastrado`; 
 
         const mediaConsumo = document.createElement("div");
         mediaConsumo.classList.add("media-consumo");
@@ -52,7 +57,7 @@ function criarElementos(dados){
             sessionStorage.setItem("nomeAmbiente", elemento.nome);
             window.location.href = "../eletros/eletros.html";
         });
-
+        
         //editar
         const editar = document.createElement("div");
         editar.classList.add("editar");
@@ -86,8 +91,8 @@ function criarElementos(dados){
         card.appendChild(editar);
         card.appendChild(apagar);
         
-        ambientes.appendChild(card); 
-    });
+        ambientes.appendChild(card);
+    }
 }
 
 async function requisicaoAmbientes(){
@@ -117,6 +122,27 @@ async function requisicaoAmbientes(){
     return dado.results;
 }
 
+async function quantidadeEletros(objectIdAmbiente){ 
+    const where = encodeURIComponent(JSON.stringify({id_ambiente: {
+        __type: "Pointer",
+        className: "ambiente",
+        objectId: objectIdAmbiente
+    }}))
 
+    const resposta = await fetch(`https://parseapi.back4app.com/classes/eletrodomestico?where=${where}`, {
+        method: 'GET',
+        headers: {
+            'X-Parse-Application-Id': APP_ID,
+            'X-Parse-REST-API-Key': API_KEY,
+            'Content-Type': 'application/json'
+        }
+    })
+    
+    if(!resposta.ok){
+        throw new Error(`Erro HTTP: ${resposta.status}`);
+    }
+    const dado = await resposta.json();
 
+    return dado.results.length;
+}
 
