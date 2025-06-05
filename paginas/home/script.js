@@ -1,12 +1,20 @@
 const APP_ID = 'ubZ4XLWmNivxZCMH7ArJ4ck8bwkf67OEt9VOGNHF';
 const API_KEY = 'ZhfsOKyedOFj6E4RDYpgasmvvjPEmoDICFOlBB1R';
 
-document.addEventListener("DOMContentLoaded", (event) => {
+document.addEventListener("DOMContentLoaded", async (event) => {
     event.preventDefault();
     
-    requisicao().then((dados) => {
-        criarElementos(dados);
-    }) 
+    try{
+        const resposta = await requisicao();
+        await criarElementos(resposta);
+    }catch(erro){
+        console.error("Erro ao carregar estabelecimentos:", erro);            
+        alert(erro.message);
+    } 
+
+    /*requisicao().then((dados) => {
+        criarElementos(dados).then();
+    })*/
 
 })
  
@@ -19,7 +27,7 @@ async function requisicao(){
         }
     }))
     
-    const resultado = await fetch(`https://parseapi.back4app.com/classes/Estabelecimentos?where=${where}`, {
+    const resposta = await fetch(`https://parseapi.back4app.com/classes/Estabelecimentos?where=${where}`, {
         method: 'GET',
         headers:{
             "X-Parse-Application-Id": APP_ID,
@@ -27,7 +35,7 @@ async function requisicao(){
             'content-type': 'application/json'
         }
     })
-    .then((res) => res.json())
+    /*.then((res) => res.json())
     .then((data) => {
         console.log(data);
         return data.results;
@@ -35,15 +43,20 @@ async function requisicao(){
     .catch(error => {
     console.error("Error na requisição: ", error);
     return[];
-})
+})*/
+    if(!resposta.ok){
+        throw new Error(`Erro HTTP: ${resposta.status}`);
+    }
 
-    return resultado;
+    const dado = await resposta.json();
+
+    return dado.results;
 };
 
-function criarElementos(resultado){
+async function criarElementos(resultado){
     const estabelecimento = document.getElementById("lista-estabelecimento");
     
-    resultado.forEach((elemento) => {
+    for(const elemento of resultado) {
         const card = document.createElement("div");
         card.classList.add("card");
 
@@ -60,13 +73,26 @@ function criarElementos(resultado){
         estabelecimentoNome.classList.add("estabelecimento");
         estabelecimentoNome.textContent = elemento.nome;
 
+        //aqui
+        const metaCosumoResposta = await metaCosumo(elemento.objectId);
+        let valorMeta = 0;
+        if(metaCosumoResposta.length > 0){
+            valorMeta = metaCosumoResposta[0].consumo;
+        }
+
+        const valor = await buscarFatura(elemento.objectId);
+        let total = 0;
+        if(valor.length > 0){
+            total = valor[0].valor.toFixed(2);
+        }
+
         const meta = document.createElement("div");
         meta.classList.add("meta");
-        meta.textContent = `Meta de consumo: R$${elemento.meta_consumo}`; 
+        meta.textContent = `Meta de consumo: ${valorMeta}Kwh`; 
 
         const fatura = document.createElement("div");
         fatura.classList.add("fatura");
-        fatura.textContent = `Fatura: R$${elemento.fatura}`; 
+        fatura.textContent = `Fatura: R$${total}`; 
 
         descricao.appendChild(estabelecimentoNome);
         descricao.appendChild(meta);
@@ -121,7 +147,7 @@ function criarElementos(resultado){
         card.appendChild(apagar);
 
         estabelecimento.appendChild(card);
-    });
+    }
 }
 
 document.getElementById("cadastro-estabelecimento").addEventListener("click", (event) => {
@@ -130,5 +156,56 @@ document.getElementById("cadastro-estabelecimento").addEventListener("click", (e
 });
 
 
+async function metaCosumo(idEstabelecimento) {
+    const where = encodeURIComponent(JSON.stringify({id_estabelecimento: {
+        __type: "Pointer",
+        className: "Estabelecimentos",
+        objectId: idEstabelecimento
+        }
+    }))
+    
+    
+    const resposta = await fetch(`https://parseapi.back4app.com/classes/meta_consumo?where=${where}`, {
+        method: 'GET',
+        headers:{
+            "X-Parse-Application-Id": APP_ID,
+            "X-Parse-REST-API-Key": API_KEY,
+            'content-type': 'application/json'
+        }
+    })
 
+    if(!resposta.ok){
+        throw new Error(`Erro HTTP: ${resposta.status}`);
+    }
 
+    const dado = await resposta.json();
+
+    return dado.results;
+} 
+
+async function buscarFatura(idEstabelecimento) {
+    const where = encodeURIComponent(JSON.stringify({id_estabelecimento: {
+        __type: "Pointer",
+        className: "Estabelecimentos",
+        objectId: idEstabelecimento
+        }
+    }))
+    
+    
+    const resposta = await fetch(`https://parseapi.back4app.com/classes/fatura?where=${where}`, {
+        method: 'GET',
+        headers:{
+            "X-Parse-Application-Id": APP_ID,
+            "X-Parse-REST-API-Key": API_KEY,
+            'content-type': 'application/json'
+        }
+    })
+
+    if(!resposta.ok){
+        throw new Error(`Erro HTTP: ${resposta.status}`);
+    }
+
+    const dado = await resposta.json();
+
+    return dado.results;
+} 
