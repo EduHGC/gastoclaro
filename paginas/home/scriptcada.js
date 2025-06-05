@@ -140,14 +140,12 @@ document.getElementById("novo-estabelecimento").addEventListener("submit", async
 
     try{
         const resposta = await cadastrarEstabelecimento(dados);
-        alert("Imóvel cadastrado com sucesso");
         console.log(resposta);
         const id_estabelecimento = resposta.objectId;
         const data = {
             "__type": "Date",
             "iso": new Date(resposta.createdAt).toISOString()
         };
-       // window.location.href = "./home.html";
         
        const consumo = parseInt(metaConsumo);
         const dadosMetaConsumo = {
@@ -178,6 +176,8 @@ document.getElementById("novo-estabelecimento").addEventListener("submit", async
         }
         const respostaFatura = await cadastrarFatura(dadosFatura);
         console.log(respostaFatura);
+        window.location.href = "./home.html";
+        alert("Imóvel cadastrado com sucesso");
     }catch(erro){
         console.error("Erro ao cadastrar:", erro);            
         alert(erro.message);
