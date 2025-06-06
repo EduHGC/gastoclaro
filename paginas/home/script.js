@@ -73,7 +73,6 @@ async function criarElementos(resultado){
         estabelecimentoNome.classList.add("estabelecimento");
         estabelecimentoNome.textContent = elemento.nome;
 
-        //aqui
         const metaCosumoResposta = await metaCosumo(elemento.objectId);
         let valorMeta = 0;
         if(metaCosumoResposta.length > 0){
@@ -117,7 +116,6 @@ async function criarElementos(resultado){
         editar.classList.add("editar");
 
         const linkEditar = document.createElement("a");
-        linkEditar.href = "#";
 
         const iconeEditar = document.createElement("img");
         iconeEditar.src = "../../assets/edit.png"
@@ -137,8 +135,6 @@ async function criarElementos(resultado){
         apagar.classList.add("apagar");
 
         const linkApagar = document.createElement("a");
-        linkApagar.href = "#";
-
 
         const iconeApagar = document.createElement("img");
         iconeApagar.src = "../../assets/trash.png"
@@ -146,6 +142,48 @@ async function criarElementos(resultado){
 
         linkApagar.appendChild(iconeApagar);
         apagar.appendChild(linkApagar);
+
+        apagar.addEventListener('click', async (evento) =>{
+            evento.preventDefault();
+            //elemento.objectId
+            const confirmacao = confirm(`Tem certeza que deseja excluir o estabelecimento "${elemento.nome}" e todos os dados associados?`);
+            if (!confirmacao) return;
+
+            try{
+                const metaCosumoResp = await metaCosumo(elemento.objectId);
+                for(let meta of metaCosumoResp){
+                    await deletarMetaConsumo(meta.objectId);
+                    console.log(`${JSON.stringify(metaCosumoResp)} - ${elemento.objectId}`);
+                }
+            }catch(erro){
+                console.error("Erro ao deletar Meta de consumo:", erro);            
+                alert(erro.message);
+            }
+            try{
+                const valorResposta = await buscarFatura(elemento.objectId)
+                for(let valorFatura of valorResposta){
+                    await deletarFatura(valorFatura.objectId);
+                    console.log(`${valorFatura} - ${elemento.objectId}`);
+                }
+            }catch(erro){
+                console.error("Erro ao deletar Fatura:", erro);            
+                alert(erro.message);
+            }
+            
+            try{
+                await deletarAmbientesEletros(elemento.objectId);
+            }catch(erro){
+                console.error("Erro ao deletar Fatura:", erro);            
+                alert(erro.message);
+            }
+
+            try{
+                await deletarEstabelecimento(elemento.objectId);
+            }catch(erro){
+                console.error("Erro ao deletar Estabelecimento:", erro);            
+                alert(erro.message);
+            }
+        })
 
         card.appendChild(pontos);
         card.appendChild(descricao);
@@ -214,4 +252,142 @@ async function buscarFatura(idEstabelecimento) {
     const dado = await resposta.json();
 
     return dado.results;
+}
+
+async function buscarAmbientes(idEstabelecimento){
+    const where = encodeURIComponent(JSON.stringify({id_estabelecimento: {
+        __type: "Pointer",
+        className: "Estabelecimentos",
+        objectId: idEstabelecimento
+        }
+    }))
+    
+    const resposta = await fetch(`https://parseapi.back4app.com/classes/ambiente?where=${where}`, {
+        method: 'GET',
+        headers:{
+            "X-Parse-Application-Id": APP_ID,
+            "X-Parse-REST-API-Key": API_KEY,
+            'content-type': 'application/json'
+        }
+    })
+
+    if(!resposta.ok){
+        throw new Error(`Erro HTTP: ${resposta.status}`);
+    }
+
+    const dado = await resposta.json();
+
+    return dado.results[0].objectId;
+}
+
+async function deletarMetaConsumo(idMeta){
+    await fetch(`https://parseapi.back4app.com/classes/meta_consumo/${idMeta}`, {
+        method: 'DELETE',
+        headers: {
+            "X-Parse-Application-Id": APP_ID,
+            "X-Parse-REST-API-Key": API_KEY
+        }
+    })
+}
+
+async function deletarFatura(idFatura){
+    await fetch(`https://parseapi.back4app.com/classes/fatura/${idFatura}`, {
+        method: 'DELETE',
+        headers: {
+            "X-Parse-Application-Id": APP_ID,
+            "X-Parse-REST-API-Key": API_KEY
+        }
+    })
+}
+
+async function deletarAmbientesEletros(idEstabelecimento){
+    const where = encodeURIComponent(JSON.stringify({id_imovel: {
+        __type: "Pointer",
+        className: "Estabelecimentos",
+        objectId: idEstabelecimento
+        }
+    }))
+    
+    const resposta = await fetch(`https://parseapi.back4app.com/classes/ambiente?where=${where}`, {
+        method: 'GET',
+        headers:{
+            "X-Parse-Application-Id": APP_ID,
+            "X-Parse-REST-API-Key": API_KEY,
+            'content-type': 'application/json'
+        }
+    })
+
+    if(!resposta.ok){
+        throw new Error(`Erro HTTP: ${resposta.status}`);
+    }
+
+    const dado = await resposta.json();
+    
+    const vetorAmbientes = dado.results;
+
+   for(const elemento of vetorAmbientes){
+       const respostaEletro = await buscarEletro(elemento.objectId);
+       for(const eletros of respostaEletro){
+            await deletarEletro(eletros.objectId);
+            console.log(eletros);
+            
+       }
+       await deletarAmbientes(elemento.objectId);
+    }
+}
+
+async function buscarEletro(idAmbiente){
+    const where = encodeURIComponent(JSON.stringify({id_ambiente: {
+        __type: "Pointer",
+        className: "ambiente",
+        objectId: idAmbiente
+        }
+    }))
+    
+    const resposta = await fetch(`https://parseapi.back4app.com/classes/eletrodomestico?where=${where}`, {
+        method: 'GET',
+        headers:{
+            "X-Parse-Application-Id": APP_ID,
+            "X-Parse-REST-API-Key": API_KEY,
+            'content-type': 'application/json'
+        }
+    })
+
+    if(!resposta.ok){
+        throw new Error(`Erro HTTP: ${resposta.status}`);
+    }
+
+    const dado = await resposta.json();
+
+    return dado.results;
+}
+
+async function deletarEletro(idEletro){
+    await fetch(`https://parseapi.back4app.com/classes/eletrodomestico/${idEletro}`, {
+        method: 'DELETE',
+        headers: {
+            "X-Parse-Application-Id": APP_ID,
+            "X-Parse-REST-API-Key": API_KEY
+        }
+    })
+}
+
+async function deletarAmbientes(idAmbiente) {
+    await fetch(`https://parseapi.back4app.com/classes/ambiente/${idAmbiente}`, {
+        method: 'DELETE',
+        headers: {
+            "X-Parse-Application-Id": APP_ID,
+            "X-Parse-REST-API-Key": API_KEY
+        }
+    })
+}
+
+async function deletarEstabelecimento(idEstabelecimento){
+    await fetch(`https://parseapi.back4app.com/classes/Estabelecimentos/${idEstabelecimento}`, {
+        method: 'DELETE',
+        headers: {
+            "X-Parse-Application-Id": APP_ID,
+            "X-Parse-REST-API-Key": API_KEY
+        }
+    })
 }
