@@ -64,11 +64,11 @@ function criarElementos(dados){
 
         const tempoUso = document.createElement("div");
         tempoUso.classList.add("tempo-uso");
-        tempoUso.textContent = "Tempo de de uso em horas: 1h"; 
+        tempoUso.textContent = `Tempo de de uso em horas: ${elemento.tempo_uso}Hr`; 
 
         const consumo = document.createElement("div");
         consumo.classList.add("consumo");
-        consumo.textContent = "Média de consumo: xxKWh"; 
+        consumo.textContent = `Potência: ${elemento.consumo}kw`; 
 
         descricao.appendChild(nome);
         descricao.appendChild(tempoUso);
