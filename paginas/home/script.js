@@ -126,6 +126,12 @@ async function criarElementos(resultado){
         linkEditar.appendChild(iconeEditar);
         editar.appendChild(linkEditar);
 
+        editar.addEventListener('click', (evento) =>{
+            evento.preventDefault();
+            window.location.href = "./homeeditar.html";
+            //aqui criar uma tela para campos de edição;
+        })
+
         //Apagar
         const apagar = document.createElement("div");
         apagar.classList.add("apagar");
@@ -208,4 +214,4 @@ async function buscarFatura(idEstabelecimento) {
     const dado = await resposta.json();
 
     return dado.results;
-} 
+}

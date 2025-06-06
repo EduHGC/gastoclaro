@@ -244,3 +244,4 @@ async function cadastrarFatura(dados) {
 
     return dado;
 }
+
