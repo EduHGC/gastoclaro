@@ -35,18 +35,19 @@ async function criarElementos(dados){
         ambiente.classList.add("ambiente");
         ambiente.textContent = elemento.nome;
 
-
-        //fazer contagem de quantidade de eletrodomestico, utilizar fetch com where usando elemento.objectId
-
-        const qtdEletro = await quantidadeEletros(elemento.objectId);
+        const eletroInfo = await quantidadeEletros(elemento.objectId);
+        const totalConsumo = eletroInfo.reduce((acumulador, atual) => {
+            const kwh = atual.consumo * atual.tempo_uso;
+            return acumulador + kwh;
+        }, 0);
 
         const quantidadeEletro = document.createElement("div");
         quantidadeEletro.classList.add("quantidade-eletro");
-        quantidadeEletro.textContent = `${qtdEletro} eletrodomestico cadastrado`; 
+        quantidadeEletro.textContent = `${eletroInfo.length} eletrodomestico cadastrado`; 
 
         const mediaConsumo = document.createElement("div");
         mediaConsumo.classList.add("media-consumo");
-        mediaConsumo.textContent = "Média de consumo: xxKWh"; 
+        mediaConsumo.textContent = `Média de consumo: ${totalConsumo}KW`; 
 
         descricao.appendChild(ambiente);
         descricao.appendChild(quantidadeEletro);
@@ -143,6 +144,6 @@ async function quantidadeEletros(objectIdAmbiente){
     }
     const dado = await resposta.json();
 
-    return dado.results.length;
+    return dado.results;
 }
 
