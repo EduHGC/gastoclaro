@@ -9,16 +9,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     const nome = document.getElementById("titulo");
     nome.querySelector("h1").textContent = sessionStorage.getItem("nomeEstabelecimento");
-
+    
     const resposta = await requisicaoAmbientes();
     await criarElementos(resposta);
     console.log(resposta);
+
 
 });
 
 async function criarElementos(dados){
     const ambientes = document.getElementById("lista-ambientes");
-
+    let maiorConsumo = 0;
+    let ambienteMaiorConsumo = "";
+    let consumoPorAmbiente = 0;
     for(const elemento of dados){
         const card = document.createElement("div");
         card.classList.add("card");
@@ -35,11 +38,18 @@ async function criarElementos(dados){
         ambiente.classList.add("ambiente");
         ambiente.textContent = elemento.nome;
 
-        const eletroInfo = await quantidadeEletros(elemento.objectId);
+        const eletroInfo = await buscarEletros(elemento.objectId);
         const totalConsumo = eletroInfo.reduce((acumulador, atual) => {
             const kwh = atual.consumo * atual.tempo_uso;
             return acumulador + kwh;
         }, 0);
+
+        consumoPorAmbiente += totalConsumo;
+
+        if(totalConsumo > maiorConsumo){
+            maiorConsumo = totalConsumo;
+            ambienteMaiorConsumo = elemento.nome;
+        }
 
         const quantidadeEletro = document.createElement("div");
         quantidadeEletro.classList.add("quantidade-eletro");
@@ -94,6 +104,18 @@ async function criarElementos(dados){
         
         ambientes.appendChild(card);
     }
+    const metaConsumo = document.getElementById("meta");
+    const percentualMaior = (100.0 * maiorConsumo) / consumoPorAmbiente;
+    const consumoAmbiente = document.getElementById("consumo-ambiente");
+    console.log(percentualMaior.toFixed(2));
+    consumoAmbiente.querySelector("h1").textContent = `${percentualMaior.toFixed(2)}%`;
+    consumoAmbiente.querySelector("h2").textContent = `${ambienteMaiorConsumo}`;
+
+    const metaValorMetaConsumo = await buscarMetaConsumo(sessionStorage.getItem("id_imovel"));
+    console.log(metaValorMetaConsumo[0].consumo);
+    const valorMeta = (consumoPorAmbiente * 100) / metaValorMetaConsumo[0].consumo;
+    console.log(valorMeta);
+    metaConsumo.querySelector("h1").textContent = `${valorMeta.toFixed(2)}%`
 }
 
 async function requisicaoAmbientes(){
@@ -123,7 +145,7 @@ async function requisicaoAmbientes(){
     return dado.results;
 }
 
-async function quantidadeEletros(objectIdAmbiente){ 
+async function buscarEletros(objectIdAmbiente){ 
     const where = encodeURIComponent(JSON.stringify({id_ambiente: {
         __type: "Pointer",
         className: "ambiente",
@@ -147,3 +169,20 @@ async function quantidadeEletros(objectIdAmbiente){
     return dado.results;
 }
 
+async function buscarMetaConsumo(id_estabelecimento){
+    const resposta = await fetch(`https://parseapi.back4app.com/classes/meta_consumo/`, {
+        method: 'GET',
+        headers: {
+            'X-Parse-Application-Id': APP_ID,
+            'X-Parse-REST-API-Key': API_KEY,
+            'Content-Type': 'application/json'
+        }
+    })
+    
+    if(!resposta.ok){
+        throw new Error(`Erro HTTP: ${resposta.status}`);
+    }
+    const dado = await resposta.json();
+
+    return dado.results;
+}
