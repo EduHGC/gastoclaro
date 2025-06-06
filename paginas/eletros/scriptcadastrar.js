@@ -11,7 +11,7 @@ document.getElementById("novo-eletro").addEventListener("submit", async (evento)
     evento.preventDefault();
     const nome = document.getElementById("input-nome").value;
     const inputConsumo = document.getElementById("input-consumo").value;
-    const consumo = parseInt(inputConsumo);
+    const consumo = parseFloat(inputConsumo);
     const inputLigado = document.getElementById("input-ligado").value;
     const tempoUso = parseInt(inputLigado);
     const idAmbiente = sessionStorage.getItem("id_ambiente");
