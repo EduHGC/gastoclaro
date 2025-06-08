@@ -183,6 +183,7 @@ async function criarElementos(resultado){
                 console.error("Erro ao deletar Estabelecimento:", erro);            
                 alert(erro.message);
             }
+            location.reload();
         })
 
         card.appendChild(pontos);
@@ -190,6 +191,7 @@ async function criarElementos(resultado){
         card.appendChild(editar);
         card.appendChild(apagar);
 
+        alert('Estabelecimento deletado com sucesso');
         estabelecimento.appendChild(card);
     }
 }

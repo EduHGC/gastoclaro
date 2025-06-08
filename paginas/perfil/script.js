@@ -7,5 +7,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.getElementById("deslogar").addEventListener("click", () => {
     sessionStorage.clear();
-    window.location.href = "../login/login.html";
+    location.replace("../login/login.html");
 })
