@@ -76,9 +76,9 @@ async function handleCredentialResponse(response) {
                         id_token: idToken
                     }
                 },
-                nome: payload.name,
-                email: payload.email,
-                username: payload.email
+                //nome: payload.name,
+                //email: payload.email,
+                //username: payload.email
             })
         });
 
