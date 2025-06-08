@@ -92,7 +92,7 @@ async function handleCredentialResponse(response) {
 
         sessionStorage.setItem("sessionToken", user.sessionToken);
         sessionStorage.setItem("userId", user.objectId);
-        //essionStorage.setItem("nome" , user.name);
+        sessionStorage.setItem("nome" , payload.name);
         window.location.href = "../home/home.html";
     } catch (err) {
         console.error("Erro no login com Google:", err);
