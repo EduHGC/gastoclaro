@@ -21,7 +21,7 @@ async function criarElementos(dados){
     const ambientes = document.getElementById("lista-ambientes");
     let maiorConsumo = 0;
     let ambienteMaiorConsumo = "";
-    let consumoPorAmbiente = 0;
+    let consumoPorAmbiente = 0.0;
     for(const elemento of dados){
         const card = document.createElement("div");
         card.classList.add("card");
@@ -97,6 +97,30 @@ async function criarElementos(dados){
         linkApagar.appendChild(iconeApagar);
         apagar.appendChild(linkApagar);
 
+        apagar.addEventListener("click", async () =>{
+            
+            const confirmacao = confirm(`Tem certeza que deseja excluir o ambiente "${elemento.nome}" e todos os dados associados?`);
+            if(!confirmacao) return;
+
+            try{
+                const resposta = await buscarEletros(elemento.objectId);
+                for(let eletros of resposta){
+                    await deletarEletro(eletros.objectId);
+                }
+            }catch(erro){
+                console.error(`Erro ao deletar eletrodomésticos do ambiente ${elemento.nome}:`, erro);            
+                alert(erro.message);
+            }
+            
+            try{
+                await deletarAmbiente(elemento.objectId);
+            }catch(erro){
+                console.error(`Erro ao deletar o ambiente ${elemento.nome}:`, erro);            
+                alert(erro.message);
+            }
+            location.reload();
+        })
+
         card.appendChild(pontos);
         card.appendChild(descricao);
         card.appendChild(editar);
@@ -107,8 +131,11 @@ async function criarElementos(dados){
     const metaConsumo = document.getElementById("meta");
     const percentualMaior = (100.0 * maiorConsumo) / consumoPorAmbiente;
     const consumoAmbiente = document.getElementById("consumo-ambiente");
-    console.log(percentualMaior.toFixed(2));
-    consumoAmbiente.querySelector("h1").textContent = `${percentualMaior.toFixed(2)}%`;
+    if(consumoPorAmbiente != 0){
+        consumoAmbiente.querySelector("h1").textContent = `${percentualMaior.toFixed(2)}%`;
+    }else{
+        consumoAmbiente.querySelector("h1").textContent = "0.00%";
+    }
     consumoAmbiente.querySelector("h2").textContent = `${ambienteMaiorConsumo}`;
 
     const metaValorMetaConsumo = await buscarMetaConsumo(sessionStorage.getItem("id_imovel"));
@@ -185,4 +212,51 @@ async function buscarMetaConsumo(id_estabelecimento){
     const dado = await resposta.json();
 
     return dado.results;
+}
+
+async function buscarEletros(idAmbiente){
+    const where = encodeURIComponent(JSON.stringify({id_ambiente: {
+        __type: "Pointer",
+        className: "ambiente",
+        objectId: idAmbiente
+        }
+    }))
+    
+    
+    const resposta = await fetch(`https://parseapi.back4app.com/classes/eletrodomestico?where=${where}`, {
+        method: 'GET',
+        headers:{
+            "X-Parse-Application-Id": APP_ID,
+            "X-Parse-REST-API-Key": API_KEY,
+            'content-type': 'application/json'
+        }
+    })
+
+    if(!resposta.ok){
+        throw new Error(`Erro HTTP: ${resposta.status}`);
+    }
+
+    const dado = await resposta.json();
+
+    return dado.results;
+}
+
+async function deletarEletro(idEletro){
+    await fetch(`https://parseapi.back4app.com/classes/eletrodomestico/${idEletro}`, {
+        method: 'DELETE',
+        headers: {
+            "X-Parse-Application-Id": APP_ID,
+            "X-Parse-REST-API-Key": API_KEY
+        }
+    })
+}
+
+async function deletarAmbiente(idAmbiente){
+    await fetch(`https://parseapi.back4app.com/classes/ambiente/${idAmbiente}`, {
+        method: 'DELETE',
+        headers: {
+            "X-Parse-Application-Id": APP_ID,
+            "X-Parse-REST-API-Key": API_KEY
+        }
+    })
 }
