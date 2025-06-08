@@ -4,11 +4,11 @@
     box-sizing: border-box;
 }
 
-html, body{
+html, body {
    height: 100%;
 }
 
-body{
+body {
     font-family: 'Roboto', sans-serif;
     display: flex;   
     align-items: center;
@@ -18,7 +18,7 @@ body{
     padding: 10px;
 }
 
-#content{
+#content {
     width: 100%;
     height: 100%;
     max-width: 360px;
@@ -30,50 +30,44 @@ body{
     padding: 20px;
 }
 
-#logo{
+#logo {
     max-width: 100%;
     height: auto;
     margin-top: 14px;
 }
 
-#voltar{
+#voltar {
     width: 100%;
     height: 48px;
     max-width: 360px;
 }
 
-#voltar a img{
+#voltar a img {
     max-width: 100%;
     height: auto;
 }
 
-
-#form-login{
+#form-login {
     width: 100%;
     display: flex;
-    flex-grow: 1;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
     font-size: 14px;
-    
 }
 
-#form-login div{
+#form-login div {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-#form-login label{
+#form-login label {
     color: #020618;
     font-size: 0.9rem;
     font-weight: 700;
-    
 }
 
-#form-login input{
+#form-login input {
     background-color: #CAD5E2;
     width: 100%;
     height: 60px;
@@ -82,25 +76,27 @@ body{
     padding: 10px;
 }
 
-#form-login input::placeholder{
+#form-login input::placeholder {
     color: #1D293D;
 }
 
-#form-login a{   
-    align-self: flex-start;
+#form-login a {
+    align-self: flex-end;
     text-decoration: none;
     color: #020618;
     font-size: 0.9rem;
     font-weight: 700;
+    margin-top: -8px;
 }
 
-#btn-login{
-    margin-top: auto;
-}
-
-#form-login button{
+#btn-login {
     width: 100%;
-    height: 62px;
+    margin-top: 10px;
+}
+
+#form-login button {
+    width: 100%;
+    height: 50px;
     border-radius: 8px;
     background-color: #45556C;
     color: #CAD5E2;
@@ -108,19 +104,55 @@ body{
     font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.8s;
+    transition: background-color 0.3s;
 }
 
- #form-login button:hover{
+#form-login button:hover {
     background-color: #CAD5E2;
     border: 2px solid #45556C;
     color: #45556C;
- }
+}
 
-#mensagem-erro{
+#mensagem-erro {
     display: none;
     align-self: flex-start;
     color: red;
     font-size: 13px;
     font-weight: 700;
+}
+
+.divisor {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0 10px;
+    color: #45556C;
+    font-weight: bold;
+    position: relative;
+}
+
+.divisor::before,
+.divisor::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: #ccc;
+}
+
+.divisor::before {
+    left: 0;
+}
+
+.divisor::after {
+    right: 0;
+}
+
+#google-login {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
 }
