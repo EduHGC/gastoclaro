@@ -56,3 +56,42 @@ function parseJwt(token) {
     return JSON.parse(jsonPayload);
 }
 
+async function handleCredentialResponse(response) {
+    const idToken = response.credential;
+    const payload = parseJwt(idToken);
+    const googleId = payload.sub;
+
+    try {
+        const res = await fetch("https://parseapi.back4app.com/users", {
+            method: "POST",
+            headers: {
+                "X-Parse-Application-Id": APP_ID,
+                "X-Parse-REST-API-Key": API_KEY,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                authData: {
+                    google: {
+                        id: googleId,
+                        id_token: idToken
+                    }
+                }
+            })
+        });
+
+        const user = await res.json();
+
+        if (!res.ok) {
+            throw new Error(user.error || "Erro ao logar com Google");
+        }
+
+        console.log("Login com Google bem-sucedido:", user);
+
+        sessionStorage.setItem("sessionToken", user.sessionToken);
+        sessionStorage.setItem("userId", user.objectId);
+        window.location.href = "../home/home.html";
+    } catch (err) {
+        console.error("Erro no login com Google:", err);
+        alert("Erro ao fazer login com Google");
+    }
+}
