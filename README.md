@@ -16,7 +16,7 @@
 ---
 
 ## 🗂️ Estrutura do Projeto
-
+<pre>
 ├── index.html # Página principal
 ├── style.css # Estilos da página inicial
 ├── assets/ # Imagens e ícones do sistema
@@ -28,8 +28,7 @@
   ├── login/ # Tela de login (e-mail e conta Google)
   ├── perfil/ # Página de perfil do usuário
   └── util
-
-
+</pre>
 ---
 
 ## ⚙️ Como Usar
@@ -45,45 +44,45 @@
 
 Estabelecimentos:
 
-id_usuario (Pointer para _User)
+- id_usuario (Pointer para _User)
 
-nome (String)
+- nome (String)
 
-cep (String)
+- cep (String)
 
-tipo (String)
+- tipo (String)
 
-endereco (String)
+- endereco (String)
 
 ambiente:
 
-id_imovel (Pointer para Estabelecimentos)
+- id_imovel (Pointer para Estabelecimentos)
 
-nome (String)
+- nome (String)
 
 eletrodomestico:
 
-id_ambiente (Pointer para ambiente)
+- id_ambiente (Pointer para ambiente)
 
-nome (String)
+- nome (String)
 
-consumo (Number)
+- consumo (Number)
 
-tempo_uso (Number)
+- tempo_uso (Number)
 
 fatura:
 
-id_estabelecimento (Pointer para Estabelecimentos)
+- id_estabelecimento (Pointer para Estabelecimentos)
 
-data_vencimento (Date)
+- data_vencimento (Date)
 
 meta_consumo:
 
-id_estabelecimento (Pointer para Estabelecimentos)
+- id_estabelecimento (Pointer para Estabelecimentos)
 
-data (Date)
+- data (Date)
 
-consumo (Number)
+- consumo (Number)
 
 
 4. Baixe ou clone este repositório.  
