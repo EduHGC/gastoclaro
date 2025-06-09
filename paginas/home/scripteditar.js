@@ -1,6 +1,10 @@
 const APP_ID = 'ubZ4XLWmNivxZCMH7ArJ4ck8bwkf67OEt9VOGNHF';
 const API_KEY = 'ZhfsOKyedOFj6E4RDYpgasmvvjPEmoDICFOlBB1R';
 
+document.getElementById("voltar").addEventListener("click", () => {
+    window.location.href = "./home.html";
+})
+
 document.addEventListener("DOMContentLoaded", async () => {
     const idEstabelecimento = sessionStorage.getItem("id_imovel");
     const nome = sessionStorage.getItem("nomeEstabelecimento");
@@ -12,8 +16,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const metaConsumo = document.getElementById("input-meta-consumo");
     const valorFatura = document.getElementById("input-conta");
     const vencimentoFatura = document.getElementById("input-vencimento-fatura");
-
-    //alert(`${nome} ${idEstabelecimento}`);
 
     try{
         const resposta = await buscarEstabelecimento(idEstabelecimento);
@@ -163,6 +165,7 @@ document.getElementById("editar-estabelecimento").addEventListener("submit", asy
         console.error("Erro ao carregar edição de estabelecimento", erro);            
         alert(erro.message);
     }
+    alert("Estabelecimento editado com sucesso");
     window.location.href = "./home.html";
 })
 

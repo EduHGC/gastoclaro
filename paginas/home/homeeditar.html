@@ -8,78 +8,54 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="content">
-       <div id="titulo">
-            <h1>Estabelecimentos</h1>
-       </div>
-       <!--<div id="corpo">
-            <div id="lista-estabelecimento"> 
-               <div class="card">
-                    <div class="pontos"></div>
-                    <div class="descricao">
-                        <div class="estabelecimento">Estabelecimento 1</div>
-                        <div class="meta">Meta de consumo: xx</div>
-                        <div class="fatura">Fatura recente: xx</div>
-                    </div>
-                    <div class="editar">
-                        <a href="#"><img src="../../assets/edit.png" alt=""></a>
-                    </div>
-                    <div class="apagar">
-                        <img src="../../assets/trash.png" alt="">
-                    </div>
-                </div>
-            </div>      
-       </div>-->
-       <div id="edicao-estabelecimento">
-                
-            <form id="editar-estabelecimento">
-                <div>
-                    <label for="input-nome">Nome do estabelecimento</label>
-                    <input required type="text" name="nome" id="input-nome">
-                </div>
-                <div>
-                    <label for="input-tipo">Tipo de estabelecimento</label>
-                    <input required type="text" name="tipo" id="input-tipo">
-                </div>
-                <div>
-                    <label for="input-cep">CEP do estabelecimento</label>
-                    <input required type="text" name="cep" id="input-cep">
-                </div>
-                <div>
-                    <label for="input-endereco">Endereço do estabelecimento</label>
-                    <input required type="text" name="endereco" id="input-endereco">
-                </div>
-                <div>
-                    <label for="input-meta-consumo">Meta de cosumo do estabelecimento</label>
-                    <input required type="text" name="meta-consumo" id="input-meta-consumo">
-                </div>
-                <div>
-                    <label for="input-conta">Valor conta de energia do estabelecimento</label>
-                    <input required type="text" name="conta" id="input-conta">
-                </div>
-                <div>
-                    <label for="input-vencimento-fatura">Data de vencimento da conta</label>
-                    <input required type="date" name="vencimento-fatura" id="input-vencimento-fatura">
-                </div>
-            </form>
-                
-                <button type="submit" form="editar-estabelecimento">Editar</button>
-        </div>
-        <div id="menu">
-            <div>
-                <a href="#"><img src="../../assets/notif.png" alt=""><span>Notificações</span></a>
-            </div>
-            <div>
-                <a href="./home.html"><img src="../../assets/homenegrito.png" alt=""><span>Página inicial</span></a>
-            </div>
-            <div>
-                <a href="#"><img src="../../assets/perfil.png" alt=""><span>Perfil</span></a>
-            </div>
-        </div>
-
+    <div class="header-app" id="voltar">
+        <div class="back-button"><img src="../../assets/Icon.png" alt=""></div> <div class="header-title">Estabelecimentos</div>
     </div>
-    
-   <script src="../utils.js"></script>
+    <div class="content-app" id="content-app">
+       <form id="editar-estabelecimento">
+            <div>
+                <label for="input-nome">Nome do estabelecimento</label>
+                <input required type="text" name="nome" id="input-nome">
+            </div>
+            <div>
+                <label for="input-tipo">Tipo de estabelecimento</label>
+                <input required type="text" name="tipo" id="input-tipo">
+            </div>
+            <div>
+                <label for="input-cep">CEP do estabelecimento</label>
+                <input required type="text" name="cep" id="input-cep">
+            </div>
+            <div>
+                <label for="input-endereco">Endereço do estabelecimento</label>
+                <input required type="text" name="endereco" id="input-endereco">
+            </div>
+            <div>
+                <label for="input-meta-consumo">Meta de cosumo do estabelecimento</label>
+                <input required type="text" name="meta-consumo" id="input-meta-consumo">
+            </div>
+            <div>
+                <label for="input-conta">Valor conta de energia do estabelecimento</label>
+                <input required type="text" name="conta" id="input-conta">
+            </div>
+            <div>
+                <label for="input-vencimento-fatura">Data de vencimento da conta</label>
+                <input required type="date" name="vencimento-fatura" id="input-vencimento-fatura">
+            </div>
+        </form>
+        <button type="submit" id="editar" form="editar-estabelecimento">Editar estabelecimento</button>
+    </div>
+    <div class="footer-app">
+        <div class="nav-button">
+            <div class="nav-icon"><img src="../../assets/perfil.png" alt=""></div> <span>Notificações</span>
+        </div>
+        <div class="nav-button">
+            <div class="nav-icon"><img src="../../assets/homenegrito.png" alt=""></div> <span>Home</span>
+        </div>
+        <div class="nav-button" id="perfil">
+            <div class="nav-icon"><img src="../../assets/perfil.png" alt=""></div> <span>Perfil</span>
+        </div>
+    </div>
+    <script src="../utils.js"></script>
     <script>
         logado();
     </script>

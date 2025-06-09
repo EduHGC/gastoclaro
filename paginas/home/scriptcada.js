@@ -111,6 +111,13 @@ function criarElementos(resultado){
 }*/
 
 
+document.getElementById("voltar").addEventListener("click", () => {
+    window.location.href = "./home.html"
+});
+
+document.getElementById("perfil").addEventListener("click", () => {
+    window.location.href = "../perfil/perfil.html";
+});
 
 document.getElementById("novo-estabelecimento").addEventListener("submit", async (evento) => {
     evento.preventDefault();

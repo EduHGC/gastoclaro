@@ -3,102 +3,115 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-html, body{
-   height: 100%;
-}
-
-body{
-    font-family: 'Roboto', sans-serif;
-    display: flex;   
-    align-items: center;
-    justify-content: center;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
     flex-direction: column;
-    background-color: #45556C;
+    height: 100vh; 
+    overflow: hidden; 
+    background-color: #f8f8f8; 
 }
 
-#content{
-    width: 100%;
-    max-width: 360px;
-    height: 100%;
-    border-radius: 8px;
-    background-color: #F1F5F9;
-    display: flex;   
-    align-items: center;
-    flex-direction: column;
-    overflow: hidden;
+.header-app {
+    padding: 10px 15px; 
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    height: 50px; 
 }
 
-#titulo{
-    width: 100%;
-    height: 70px;   
+.back-button {
+    width: 30px;
+    height: 30px; 
+    border-radius: 5px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.2);
-    flex-shrink: 0;
+    font-weight: bold;
+    color: #333;
+     
 }
 
-#titulo h1{
-    font-size: 1.5rem;
+.header-title {
+    flex-grow: 1; 
+    text-align: center; 
+    margin-left: -30px;
 }
 
-#menu{
-    width: 100%;
-    height: 82px;
-    border-radius: 0px 0px 8px 8px;
-    background-color: #F1F5F9;
-    box-shadow: 0 -4px 8px -2px rgba(0, 0, 0, 0.2);
-    flex-shrink: 0;
-}
-
-#corpo{
-    margin-top: 10px;
-    width: 100%;
-    height: 100%;
-    max-width: 360px;
-    max-height: 400px;
-    display: flex;
+.footer-app {
+    padding: 5px 0; 
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex; 
+    justify-content: space-around; 
     align-items: center;
-    flex-direction: column;  
-    overflow-y: auto;
-    padding-left: 20px;
-    padding-bottom: 10px;
-    flex-grow: 1;
-
-    &::-webkit-scrollbar {
-        width: 10px; 
-    }
-
-    &::-webkit-scrollbar-track{
-        background-color:rgba(0, 0, 0, 0.2);
-        border-radius: 20px;
-    }
-    &::-webkit-scrollbar-thumb{
-        background-color:rgba(0, 0, 0, 0.3);
-        border-radius: 20px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-        background-color:rgba(0, 0, 0, 0.5); 
-    }
-
-    &::-webkit-scrollbar-button {
-        display: none;
-    }
+    height: 60px; 
 }
 
-#lista-estabelecimento{
-    width: 100%;
+.nav-button {
+    width: 80px; 
+    height: 50px; 
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8em;
+    text-align: center;
+    
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-weight: bold;
+}
+
+.content-app {
+    flex-grow: 1; 
+    margin-top: 50px; 
+    margin-bottom: 60px; 
+    padding: 20px;
+    overflow-y: auto; 
+    -webkit-overflow-scrolling: touch; 
+    background-color: #f0f0f0; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
 }
 
 .card{
     width: 100%;
     max-width: 320px;
+    min-height: 90px;
     display: flex;
     flex-direction: row;
     height: 93px;
@@ -166,26 +179,15 @@ body{
     border-radius: 0px 8px 8px 0px;
 }
 
-#cadastro-estabelecimento{
-    width: 100%;
-    max-width: 360px;
-    height: 100%;
-    max-height: 60px;
-    display: flex;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-}
-
-#cadastro-estabelecimento button{
+#novo-estabelecimento{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
     max-width: 320px;
-    max-height: 52px;
+    max-height: 60px;
+    min-height: 50px;
     margin-top: 20px;
     border-radius: 8px;
     background-color: #45556C;
@@ -195,66 +197,10 @@ body{
     white-space: pre;
     font-weight: 700;
     cursor: pointer;
-    
 }
 
-#cadastro-estabelecimento button span{
-    font-size: 1.5rem;
-}
-
-#cadastro-estabelecimento button:hover{
+#novo-estabelecimento:hover{
     background-color: #CAD5E2;
     border: 2px solid #45556C;
     color: #45556C;
  }
-
-#menu {
-    width: 100%;
-    height: 82px;
-    background-color: #F1F5F9;
-    margin-top: auto;
-    box-shadow: 0 -4px 8px -2px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
-}
-
-#menu div {
-    width: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#menu div a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: inherit;
-    font-size: 0.75rem;
-    text-align: center;
-}
-
-#menu div a span{
-    font-weight: 700;
-}
-
-#menu div img {
-    width: 24px;
-    height: 24px;
-    margin-bottom: 4px;
-}
-
-#menu div:first-child {
-    margin-right: 40px;
-    color: #45556C;
-}
-
-#menu div:last-child {
-    margin-left: 40px;
-    color: #45556C;
-}
-

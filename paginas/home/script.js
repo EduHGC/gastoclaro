@@ -16,7 +16,8 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         criarElementos(dados).then();
     })*/
 
-})
+});
+
  
 async function requisicao(){
     const idProprietario = sessionStorage.getItem("userId");
@@ -54,8 +55,9 @@ async function requisicao(){
 };
 
 async function criarElementos(resultado){
-    const estabelecimento = document.getElementById("lista-estabelecimento");
-    
+    const estabelecimento = document.getElementById("content-app");
+    const novoEstabelecimentoButton = document.getElementById("novo-estabelecimento");
+
     for(const elemento of resultado) {
         const card = document.createElement("div");
         card.classList.add("card");
@@ -126,6 +128,7 @@ async function criarElementos(resultado){
 
         editar.addEventListener('click', (evento) =>{
             evento.preventDefault();
+            sessionStorage.setItem("id_imovel", elemento.objectId);
             window.location.href = "./homeeditar.html";
             //aqui criar uma tela para campos de edição;
         })
@@ -194,14 +197,18 @@ async function criarElementos(resultado){
 
         
         estabelecimento.appendChild(card);
+        estabelecimento.insertBefore(card, novoEstabelecimentoButton);
     }
 }
 
-document.getElementById("cadastro-estabelecimento").addEventListener("click", (event) => {
+document.getElementById("novo-estabelecimento").addEventListener("click", (event) => {
         event.preventDefault();
         window.location.href = "./homecadastro.html";
 });
 
+document.getElementById("perfil").addEventListener("click", () => {
+    window.location.href = "../perfil/perfil.html";
+});
 
 async function metaCosumo(idEstabelecimento) {
     const where = encodeURIComponent(JSON.stringify({id_estabelecimento: {
@@ -211,7 +218,7 @@ async function metaCosumo(idEstabelecimento) {
         }
     }))
     
-    
+ 
     const resposta = await fetch(`https://parseapi.back4app.com/classes/meta_consumo?where=${where}`, {
         method: 'GET',
         headers:{
