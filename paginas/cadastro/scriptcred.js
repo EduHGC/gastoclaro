@@ -107,9 +107,6 @@ document.getElementById("form-credenciais").addEventListener("submit", async (ev
             console.error("Erro ao cadastrar:", erro);
             alert(erro.message);
         }
-        
-
-
     }else{
         alert("Campo de email ou senha estão incorretos");
     }
