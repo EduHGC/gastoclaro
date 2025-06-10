@@ -83,6 +83,13 @@ async function criarElementos(dados){
         linkEditar.appendChild(iconeEditar);
         editar.appendChild(linkEditar);
 
+        editar.addEventListener("click", (evento) => {
+            evento.preventDefault();
+            sessionStorage.setItem("id_ambiente", elemento.objectId);
+            sessionStorage.setItem("nome_ambiente", elemento.nome);
+            window.location.href = "./ambienteeditar.html";
+        })
+
         //Apagar
         const apagar = document.createElement("div");
         apagar.classList.add("apagar");

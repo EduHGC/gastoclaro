@@ -1,0 +1,170 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Ocupa 100% da altura da viewport */
+    overflow: hidden; /* Evita rolagem do body */
+    background-color: #f8f8f8; /* Cor de fundo geral do app */
+}
+
+.header-app {
+    padding: 10px 15px; /* Menos padding vertical para um visual mais clean */
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex; /* Para alinhar o botão e o título */
+    align-items: center; /* Alinha verticalmente os itens */
+    justify-content: space-between; /* Espaço entre o botão e o título */
+    height: 50px; /* Altura fixa do cabeçalho */
+}
+
+.back-button {
+    width: 30px;
+    height: 30px; /* Amarelo para simular um botão de volta */
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #333;
+    font-size: 1.5em; /* Para o '←' se for usado */
+}
+
+.header-title {
+    flex-grow: 1; /* Permite que o título ocupe o espaço restante */
+    text-align: center; /* Centraliza o título */
+    margin-left: -30px; /* Compensa o espaço do botão para centralizar melhor */
+}
+
+.footer-app {
+    padding: 5px 0; /* Menos padding vertical */
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex; /* Para alinhar os botões de navegação */
+    justify-content: space-around; /* Distribui os botões igualmente */
+    align-items: center;
+    height: 60px; /* Altura fixa do rodapé */
+}
+
+.nav-button {
+    width: 80px; /* Largura do "botão" */
+    height: 50px; /* Altura do "botão" */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8em;
+    text-align: center;
+    
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Efeito hover sutil */
+}
+
+.nav-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-weight: bold;
+}
+
+.content-app {
+    flex-grow: 1; /* Permite que o conteúdo ocupe o espaço restante */
+    margin-top: 50px; /* Espaço para o cabeçalho fixo (50px header + 10px padding vertical total) */
+    margin-bottom: 60px; /* Espaço para o rodapé fixo (60px footer + 10px padding vertical total) */
+    padding: 20px;
+    overflow-y: auto; /* Adiciona rolagem vertical se o conteúdo for maior que o espaço */
+    -webkit-overflow-scrolling: touch; /* Melhora a rolagem em dispositivos iOS */
+    background-color: #f0f0f0; /* Um cinza claro para o fundo do conteúdo */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+}
+
+
+#editar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    max-width: 320px;
+    max-height: 60px;
+    min-height: 50px;
+    margin-top: 20px;
+    border-radius: 8px;
+    background-color: #45556C;
+    color: #F1F5F9;
+    border: none;
+    font-size: 1rem;
+    white-space: pre;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#editar:hover{
+    background-color: #CAD5E2;
+    border: 2px solid #45556C;
+    color: #45556C;
+ }
+
+
+#editar-ambiente{
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 14px;
+    
+    align-items: center; 
+}
+    
+#editar-ambiente div{
+    width: 100%;
+}
+
+#editar-ambiente label{
+    color: #020618;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+#editar-ambiente input{
+    background-color: #CAD5E2;
+    width: 100%;
+    max-width: 320px;
+    height: 100%;
+    min-height: 30px;
+    max-height: 40px;
+    padding: 5px;
+    border: none;
+    border-radius: 8px;
+}

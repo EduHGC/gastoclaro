@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styleeditar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header-app" id="voltar">
+        <div class="back-button"><img src="../../assets/Icon.png" alt=""></div> <div class="header-title" id="header-title"></div>
+    </div>
+    <div class="content-app" id="content-app">
+       <form id="editar-ambiente">
+            <div>
+                <label for="input-nome">Nome do ambiente</label>
+                <input required type="text" name="nome" id="input-nome">
+            </div>
+        </form>
+        <button type="submit" id="editar" form="editar-ambiente">Editar ambiente</button>
+    </div>
+    
+    <script src="../utils.js"></script>
+    <script>
+        logado();
+    </script>
+    <script src="./scripteditar.js"></script>
+</body>
+</html>
