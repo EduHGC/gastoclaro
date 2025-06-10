@@ -15,29 +15,31 @@ body{
     justify-content: center;
     flex-direction: column;
     background-color: #45556C;
-    padding: 10px;
 }
 
 #content{
     width: 100%;
     height: 100%;
-    max-width: 360px;
     background-color: #F1F5F9;
     border-radius: 8px;
     display: flex;
     flex-direction: column; 
     padding: 20px;
+    align-items: center;
 }
 
 #voltar{
     width: 100%;
     height: 48px;
-    max-width: 360px;
 }
 
 #voltar a img{
     max-width: 100%;
     height: auto;
+}
+
+#cabecalho {
+    width: 100%;
 }
 
 #cabecalho-img{
@@ -119,6 +121,13 @@ body{
     display: none;
 }
 
+#btn-cadastrar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #btn-cadastrar button{
     width: 100%;
     height: 62px;
@@ -137,3 +146,21 @@ body{
     border: 2px solid #45556C;
     color: #45556C;
  }
+
+ @media (min-width: 500px) {
+    #form-credenciais {
+        width: 30rem;
+    }
+
+    #cabecalho {
+        width: 30rem;
+    }
+
+    #voltar {
+        width: 30rem;
+    }
+
+    #btn-cadastrar {
+        width: 30rem;
+    }
+  }
