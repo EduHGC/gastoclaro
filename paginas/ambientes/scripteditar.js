@@ -3,11 +3,12 @@ const API_KEY = 'ZhfsOKyedOFj6E4RDYpgasmvvjPEmoDICFOlBB1R';
 
 
 document.addEventListener("DOMContentLoaded", async () => {
-    
-    const nome = document.getElementById("header-title").textContent = sessionStorage.getItem("nome_ambiente");
+    const titulo = document.getElementById("header-title");
+    const nome = sessionStorage.getItem("nome_ambiente");
+    const nomeEstabelecimento = sessionStorage.getItem("nomeEstabelecimento");
+    titulo.textContent = `${nomeEstabelecimento} > ${nome}`;
     const idAmbiente = sessionStorage.getItem("id_ambiente");
     const inputNome = document.getElementById("input-nome");
-    
 
     try{
         const resposta = await buscarAmbiente(idAmbiente);
@@ -17,7 +18,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         alert(erro.message);
     }
 });
-
 
 document.getElementById("editar-ambiente").addEventListener("submit", async (evento) => {
     evento.preventDefault();
@@ -33,6 +33,10 @@ document.getElementById("editar-ambiente").addEventListener("submit", async (eve
         console.erro(`Erro ao editar ambiente ${nome}:`, erro)
     }
     alert("Nome do ambiente editado com sucesso");
+    window.location.href = "./ambiente.html";
+})
+
+document.getElementById("header-title").addEventListener("click", () => {
     window.location.href = "./ambiente.html";
 })
 
