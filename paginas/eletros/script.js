@@ -74,9 +74,7 @@ function criarElementos(dados){
         descricao.appendChild(tempoUso);
         descricao.appendChild(consumo);
 
-        
-        
-
+        //editar
         const editar = document.createElement("div");
         editar.classList.add("editar");
 
@@ -104,6 +102,19 @@ function criarElementos(dados){
         linkApagar.appendChild(iconeApagar);
         apagar.appendChild(linkApagar);
 
+        apagar.addEventListener("click", async () => {
+            const confirmacao = confirm(`Tem certeza que deseja excluir o eletro "${elemento.nome}" e todos os dados associados?`);
+            if(!confirmacao) return;
+            
+            try{
+                await deletarEletro(elemento.objectId);
+            }catch(erro){
+                console.error(`Erro ao deletar o eletro ${elemento.nome}:`, erro);            
+                alert(erro.message);
+            }
+            location.reload();
+        })
+
         card.appendChild(pontos);
         card.appendChild(descricao);
         card.appendChild(editar);
@@ -111,4 +122,14 @@ function criarElementos(dados){
         
         eletro.appendChild(card); 
     });
+}
+
+async function deletarEletro(idEletro){
+    await fetch(`https://parseapi.back4app.com/classes/eletrodomestico/${idEletro}`, {
+        method: 'DELETE',
+        headers: {
+            "X-Parse-Application-Id": APP_ID,
+            "X-Parse-REST-API-Key": API_KEY
+        }
+    })
 }
