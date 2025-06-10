@@ -119,6 +119,23 @@ document.getElementById("perfil").addEventListener("click", () => {
     window.location.href = "../perfil/perfil.html";
 });
 
+document.getElementById("input-cep").addEventListener("input", async (evento) => {
+    evento.preventDefault();
+
+    const cep = document.getElementById("input-cep").value;
+    const eValido = /^\d{8}$/.test(cep);
+    if(cep.length == 8 && eValido){
+        const endereco = document.getElementById("input-endereco");
+        const resposta = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const dado = await resposta.json();
+        if(dado.erro){
+            alert("Cep inválido");
+        }else{
+            endereco.value = `${dado.logradouro}, ${dado.bairro}, ${dado.localidade} - ${dado.uf}`;
+        }
+    }
+})
+
 document.getElementById("novo-estabelecimento").addEventListener("submit", async (evento) => {
     evento.preventDefault();
     //sessionStorage.getItem("sessionToken");
@@ -130,6 +147,17 @@ document.getElementById("novo-estabelecimento").addEventListener("submit", async
     const metaConsumo = document.getElementById("input-meta-consumo").value;
     const valorFatura = document.getElementById("input-conta").value;
     const vencimentoFatura = document.getElementById("input-vencimento-fatura").value;
+
+    if (isNaN(Number(metaConsumo)) || isNaN(Number(valorFatura))) {
+        alert("Meta de consumo e valor da fatura devem ser números válidos.");
+        return;
+    }   
+
+    const eValido = /^\d{8}$/.test(cep);
+    if(cep.length !== 8 && !eValido){
+        alert("Insira um cep válido")
+        return;
+    }
 
     const dados = {
         id_usuario: {
