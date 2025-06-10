@@ -78,7 +78,8 @@ async function handleCredentialResponse(response) {
                 },
                 nome: payload.name,
                 email: payload.email,
-                username: payload.email
+                username: payload.email,
+                foto: payload.picture
             })
         });
 
@@ -93,6 +94,7 @@ async function handleCredentialResponse(response) {
         sessionStorage.setItem("sessionToken", user.sessionToken);
         sessionStorage.setItem("userId", user.objectId);
         sessionStorage.setItem("nome" , payload.name);
+        sessionStorage.setItem("foto", payload.picture);
         window.location.href = "../home/home.html";
     } catch (err) {
         console.error("Erro no login com Google:", err);
