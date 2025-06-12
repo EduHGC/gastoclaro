@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+   height: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;   
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #F1F5F9;
+}
+
+#content {
+    width: 100%;
+    height: 100%;
+    background-color: #F1F5F9;
+    border-radius: 8px;
+    display: flex;  
+    flex-direction: column; 
+    align-items: center;
+    padding: 20px;
+}
+
+#logo {
+    max-width: 100%;
+    height: auto;
+    margin-top: 14px;
+}
+
+#voltar {
+    width: 100%;
+    height: 48px;
+}
+
+#voltar a img {
+    max-width: 100%;
+    height: auto;
+}
+
+#form-recuperar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 14px;
+}
+
+#form-recuperar div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#form-recuperar label {
+    color: #020618;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+#form-recuperar input {
+    background-color: #CAD5E2;
+    width: 100%;
+    height: 60px;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+#form-recuperar input::placeholder {
+    color: #1D293D;
+}
+
+#form-recuperar a {
+    align-self: flex-end;
+    text-decoration: none;
+    color: #020618;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-top: -8px;
+}
+
+#btn-recuperar {
+    width: 100%;
+    margin-top: 10px;
+}
+
+#form-recuperar button {
+    width: 100%;
+    height: 50px;
+    border-radius: 8px;
+    background-color: #45556C;
+    color: #CAD5E2;
+    border: none;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#form-recuperar button:hover {
+    background-color: #CAD5E2;
+    border: 2px solid #45556C;
+    color: #45556C;
+}
+
+
+
+@media (min-width: 500px) {
+   #content {
+    width: 30rem;
+   }
+ }
