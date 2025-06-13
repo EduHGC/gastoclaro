@@ -14,12 +14,11 @@ body{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: #45556C;
 }
 
 #content {
     width: 100%;
-    max-width: 360px;
+    align-items: center;
     height: 100%;
     border-radius: 8px;
     background-color: #F1F5F9;
@@ -65,6 +64,7 @@ body{
     padding: 10px;
     margin-top: 10px;
     overflow-y: auto;
+    max-width: 360px;
 }
 
 #novo-eletro {

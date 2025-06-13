@@ -204,8 +204,8 @@ body{
     color: #45556C;
  }
 
- @media (min-width: 500px) {
+ /* @media (min-width: 500px) {
    #content {
     width: 30rem;
    }
- }
+ } */
