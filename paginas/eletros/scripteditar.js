@@ -4,7 +4,7 @@ const API_KEY = 'ZhfsOKyedOFj6E4RDYpgasmvvjPEmoDICFOlBB1R';
 document.addEventListener("DOMContentLoaded", async () => {
     const titulo = document.getElementById("header-title");
     const nome = sessionStorage.getItem("nome_eletro");
-    const nomeAmbiente = sessionStorage.getItem("nome_ambiente");
+    const nomeAmbiente = sessionStorage.getItem("nomeAmbiente");
     titulo.textContent = `${nomeAmbiente} > ${nome}`;
     const idEletro = sessionStorage.getItem("id_eletro");
 
@@ -31,16 +31,18 @@ document.getElementById("editar-eletro").addEventListener("submit", async (event
     const inputNome = document.getElementById("input-nome").value;
     const inputConsumo = document.getElementById("input-consumo").value;
     const inputTempoUso = document.getElementById("input-ligado").value;
+    const consumo = parseFloat(inputConsumo);
+    const tempo_uso = parseFloat(inputTempoUso)
     const dados = {
         nome: inputNome,
-        cosumo: inputConsumo,
-        tempo_uso: inputTempoUso
+        consumo: consumo,
+        tempo_uso: tempo_uso
     }
 
     try{
         const resposta = await editarEletro(idEletro, dados);
     }catch(erro){
-        console.erro(`Erro ao editar eletro ${nome}:`, erro)
+        console.error(`Erro ao editar eletro ${inputNome}:`, erro)
     }
     alert("Eletro editado com sucesso");
     window.location.href = "./eletros.html";
