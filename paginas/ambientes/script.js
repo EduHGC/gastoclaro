@@ -135,8 +135,10 @@ async function criarElementos(dados){
         
         ambientes.appendChild(card);
     }
-    const metaConsumo = document.getElementById("meta");
     const percentualMaior = (100.0 * maiorConsumo) / consumoPorAmbiente;
+    //aqui
+
+    /*const percentualMaior = (100.0 * maiorConsumo) / consumoPorAmbiente;
     const consumoAmbiente = document.getElementById("consumo-ambiente");
     if(consumoPorAmbiente != 0){
         consumoAmbiente.querySelector("h1").textContent = `${percentualMaior.toFixed(2)}%`;
@@ -149,7 +151,22 @@ async function criarElementos(dados){
     console.log(metaValorMetaConsumo[0].consumo);
     const valorMeta = (consumoPorAmbiente * 100) / metaValorMetaConsumo[0].consumo;
     console.log(valorMeta);
-    metaConsumo.querySelector("h1").textContent = `${valorMeta.toFixed(2)}%`
+    metaConsumo.querySelector("h1").textContent = `${valorMeta.toFixed(2)}%`*/
+
+    //aqui
+
+    if(consumoPorAmbiente != 0){
+        adicionarTabela("#gauge", `${percentualMaior.toFixed(2)}`, `${ambienteMaiorConsumo}`, "Maior Consumo");
+    }else{
+        adicionarTabela("#gauge", 0, "Sem eletro", "Maior Consumo");
+    }
+    
+    const metaValorMetaConsumo = await buscarMetaConsumo(sessionStorage.getItem("id_imovel"));
+    const valorMeta = (consumoPorAmbiente * 100) / metaValorMetaConsumo[0].consumo;
+    //console.log(consumoPorAmbiente);
+    console.log(valorMeta);
+    console.log(metaValorMetaConsumo[0].consumo)
+    adicionarTabela("#gauge", `${valorMeta.toFixed(2)}`, metaValorMetaConsumo[0].consumo, "Meta de Consumo");
 }
 
 async function requisicaoAmbientes(){
@@ -266,4 +283,34 @@ async function deletarAmbiente(idAmbiente){
             "X-Parse-REST-API-Key": API_KEY
         }
     })
+}
+
+function adicionarTabela(dom, porcentagem, text, legenda) {
+  document.querySelector(dom).innerHTML += `
+<div class="skill">
+  <div class="outher">
+    <div class="inner">
+        <div class="number">
+          ${porcentagem}%  
+        </div>
+        <div class="text">
+          ${text}  
+        </div>
+    </div>
+  </div>
+  <div class="legenda">
+    ${legenda}
+  </div>
+          
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+    <defs>
+      <linearGradient id="GradientColor">
+        <stop offset="0%" stop-color="#DA22FF"/>
+        <stop offset="100%" stop-color="#9733EE"/>
+      </linearGradient>
+    </defs>
+    <circle cx="80" cy=80 r="70" stroke-linecap="round" style="stroke-dashoffset: ${(((450 * porcentagem) / 100)-450)*-1}" />
+  </svg>
+<div/>
+`;
 }
