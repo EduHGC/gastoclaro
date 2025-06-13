@@ -34,7 +34,7 @@ document.getElementById("editar-eletro").addEventListener("submit", async (event
     const inputNome = document.getElementById("input-nome").value;
     const inputConsumo = document.getElementById("input-consumo").value;
     const inputTempoUso = document.getElementById("input-ligado").value;
-    const consumo = parseFloat(inputConsumo);
+    const consumo = parseFloat(inputConsumo) / 1000.0;
     const tempo_uso = parseFloat(inputTempoUso)
     const dados = {
         nome: inputNome,
