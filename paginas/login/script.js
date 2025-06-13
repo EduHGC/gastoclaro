@@ -5,15 +5,13 @@ const API_KEY = 'ZhfsOKyedOFj6E4RDYpgasmvvjPEmoDICFOlBB1R';
 document.getElementById('form-login').addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    // Obter o token de resposta do reCAPTCHA
     const recaptchaResponse = grecaptcha.getResponse();
 
-    // Se o reCAPTCHA não foi preenchido, exibir um erro
     if (!recaptchaResponse) {
         const erroMensagem = document.getElementById("mensagem-erro");
         erroMensagem.textContent = "Por favor, complete o reCAPTCHA.";
         erroMensagem.style.display = "block";
-        return; // Impede o envio do formulário
+        return;
     }
 
 
@@ -46,9 +44,8 @@ document.getElementById('form-login').addEventListener('submit', async (event) =
     } catch (error) {
         console.error("Erro ao fazer login:", error);
         const erroMensagem = document.getElementById("mensagem-erro");
-        erroMensagem.textContent = "Email ou senha inválidos"; // Redefine a mensagem de erro padrão
+        erroMensagem.textContent = "Email ou senha inválidos";
         erroMensagem.style.display = "block";
-        // Resetar o reCAPTCHA para que o usuário possa tentar novamente
         grecaptcha.reset();
     }
 });

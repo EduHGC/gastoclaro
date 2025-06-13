@@ -136,7 +136,7 @@ body {
  }
 
 
-#editar-ambiente{
+#editar-eletro{
     width: 100%;
     max-width: 320px;
     display: flex;
@@ -147,17 +147,17 @@ body {
     align-items: center; 
 }
     
-#editar-ambiente div{
+#editar-eletro div{
     width: 100%;
 }
 
-#editar-ambiente label{
+#editar-eletro label{
     color: #020618;
     font-size: 0.8rem;
     font-weight: 700;
 }
 
-#editar-ambiente input{
+#editar-eletro input{
     background-color: #CAD5E2;
     width: 100%;
     max-width: 320px;

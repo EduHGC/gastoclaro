@@ -88,6 +88,13 @@ function criarElementos(dados){
         linkEditar.appendChild(iconeEditar);
         editar.appendChild(linkEditar);
 
+        editar.addEventListener("click", (evento) => {
+            evento.preventDefault();
+            sessionStorage.setItem("id_eletro", elemento.objectId);
+            sessionStorage.setItem("nome_eletro", elemento.nome);
+            window.location.href = "./eletroseditar.html";
+        })
+
         //Apagar
         const apagar = document.createElement("div");
         apagar.classList.add("apagar");
