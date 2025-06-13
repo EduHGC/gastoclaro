@@ -24,6 +24,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
+document.getElementById("voltar").addEventListener("click", () => {
+    window.location.href = "./eletros.html";
+})
 
 document.getElementById("editar-eletro").addEventListener("submit", async (evento) => {
     evento.preventDefault();
