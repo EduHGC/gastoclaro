@@ -1,5 +1,6 @@
 const APP_ID = 'ubZ4XLWmNivxZCMH7ArJ4ck8bwkf67OEt9VOGNHF';
-const API_KEY = 'ZhfsOKyedOFj6E4RDYpgasmvvpPEmoDICFOlBB1R';
+const API_KEY = 'ZhfsOKyedOFj6E4RDYpgasmvvjPEmoDICFOlBB1R';
+
 
 document.getElementById('form-login').addEventListener('submit', async (event) => {
     event.preventDefault();
