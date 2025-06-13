@@ -1,28 +1,37 @@
 const APP_ID = 'ubZ4XLWmNivxZCMH7ArJ4ck8bwkf67OEt9VOGNHF';
-const API_KEY = 'ZhfsOKyedOFj6E4RDYpgasmvvjPEmoDICFOlBB1R';
-
+const API_KEY = 'ZhfsOKyedOFj6E4RDYpgasmvvpPEmoDICFOlBB1R';
 
 document.getElementById('form-login').addEventListener('submit', async (event) => {
     event.preventDefault();
 
+    // Obter o token de resposta do reCAPTCHA
+    const recaptchaResponse = grecaptcha.getResponse();
+
+    // Se o reCAPTCHA não foi preenchido, exibir um erro
+    if (!recaptchaResponse) {
+        const erroMensagem = document.getElementById("mensagem-erro");
+        erroMensagem.textContent = "Por favor, complete o reCAPTCHA.";
+        erroMensagem.style.display = "block";
+        return; // Impede o envio do formulário
+    }
+
+
     const email = document.getElementById('input-email').value;
     const senha = document.getElementById('input-password').value;
     const URL = `https://parseapi.back4app.com/login?username=${encodeURIComponent(email)}&password=${encodeURIComponent(senha)}`;
-    
-    try{
-        const response = await fetch(URL, {
-        method: 'GET',
-        headers:{
-            "X-Parse-Application-Id": APP_ID,
-            "X-Parse-REST-API-Key": API_KEY,
-            'content-type': 'application/json'
-        }
-        })
 
-        if(!response.ok){
+    try {
+        const response = await fetch(URL, {
+            method: 'GET',
+            headers: {
+                "X-Parse-Application-Id": APP_ID,
+                "X-Parse-REST-API-Key": API_KEY,
+                'content-type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
             throw new Error("Email ou senha inválido");
-            
-            
         }
 
         const data = await response.json();
@@ -33,25 +42,24 @@ document.getElementById('form-login').addEventListener('submit', async (event) =
         sessionStorage.setItem("nome", data.nome);
         sessionStorage.setItem("sobrenome", data.sobrenome);
         window.location.href = "../home/home.html";
-    }catch (error) {
+    } catch (error) {
         console.error("Erro ao fazer login:", error);
         const erroMensagem = document.getElementById("mensagem-erro");
+        erroMensagem.textContent = "Email ou senha inválidos"; // Redefine a mensagem de erro padrão
         erroMensagem.style.display = "block";
-
+        // Resetar o reCAPTCHA para que o usuário possa tentar novamente
+        grecaptcha.reset();
     }
-})
+});
 
-    
-//sessionStorage.setItem('sessinonToken', data.sessionToken);
-        //window.location.href = "../home/home.html";
 function parseJwt(token) {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     const jsonPayload = decodeURIComponent(
         atob(base64)
-        .split('')
-        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-        .join('')
+            .split('')
+            .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+            .join('')
     );
     return JSON.parse(jsonPayload);
 }
@@ -85,7 +93,7 @@ async function handleCredentialResponse(response) {
 
         const user = await res.json();
 
-        if (!res.ok ) {
+        if (!res.ok) {
             throw new Error(user.error || "Erro ao logar com Google");
         }
 
@@ -93,7 +101,7 @@ async function handleCredentialResponse(response) {
 
         sessionStorage.setItem("sessionToken", user.sessionToken);
         sessionStorage.setItem("userId", user.objectId);
-        sessionStorage.setItem("nome" , payload.name);
+        sessionStorage.setItem("nome", payload.name);
         sessionStorage.setItem("foto", payload.picture);
         window.location.href = "../home/home.html";
     } catch (err) {
